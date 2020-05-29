@@ -32,9 +32,6 @@ public class MergeSort {
     }
 
 
-    public List<int[] nums> partion(int[] nums){
-         List<int[] nums> al=new         
-    }
 
 
     public static void main(String[] args){
