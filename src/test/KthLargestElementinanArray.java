@@ -9,7 +9,19 @@ import java.util.*;
  * create on 2020/6/29 7:42
  */
 public class KthLargestElementinanArray {
+    //堆排序
     public int findKthLargest(int[] nums, int k) {
+        Arrays.sort(nums);
+        return nums[nums.length - k];
+    }
+
+    //排序
+    public int findKthLargest2(int[] nums, int k) {
+        Arrays.sort(nums);
+        return nums[nums.length - k];
+    }
+
+    public int findKthLargest1(int[] nums, int k) {
         //栈顶保存第K大的元素
         Queue<Integer> queue = new PriorityQueue<>(Comparator.comparingInt(o -> o));
         for (int num : nums) {
