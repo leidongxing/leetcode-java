@@ -9,14 +9,8 @@ import java.util.*;
  * create on 2020/6/29 7:42
  */
 public class KthLargestElementinanArray {
-    //堆排序
-    public int findKthLargest(int[] nums, int k) {
-        Arrays.sort(nums);
-        return nums[nums.length - k];
-    }
-
     //排序
-    public int findKthLargest2(int[] nums, int k) {
+    public int findKthLargest(int[] nums, int k) {
         Arrays.sort(nums);
         return nums[nums.length - k];
     }
