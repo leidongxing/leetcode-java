@@ -10,6 +10,13 @@ import java.util.*;
  */
 public class SlidingWindowMaximum {
     public int[] maxSlidingWindow(int[] nums, int k) {
+        if (nums.length * k == 0) {
+            return new int[0];
+        }
+        if (k == 1) {
+            return nums;
+        }
+
         //双端队列 保存的是数组的坐标
         Deque<Integer> queue = new ArrayDeque<>();
         int[] result = new int[nums.length - k + 1];
