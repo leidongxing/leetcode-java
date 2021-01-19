@@ -3,6 +3,9 @@ package test;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+  * 前序遍历
+ */
 public class BinaryTreePreorderTraversal {
     List<Integer> li = new LinkedList<Integer>();
 
