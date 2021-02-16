@@ -1,5 +1,8 @@
 package test;
 
+/**
+ * 数组拆分I
+ */
 public class ArrayPartitionI {
     public int arrayPairSum(int[] nums) {
         quickSort(nums, 0, nums.length - 1);
@@ -10,7 +13,7 @@ public class ArrayPartitionI {
         return sum;
     }
 
-    int[] quickSort(int[] nums, int left, int right) {
+    private int[] quickSort(int[] nums, int left, int right) {
         int p = 0;
         if (left < right) {
             p = partition(nums, left, right);
@@ -20,7 +23,7 @@ public class ArrayPartitionI {
         return nums;
     }
 
-    int partition(int[] nums, int left, int right) {
+    private int partition(int[] nums, int left, int right) {
         int key = nums[left];
         while (left < right) {
             while (left < right && nums[right] >= key) {
