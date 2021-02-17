@@ -1,5 +1,8 @@
 package test;
 
+/**
+ *  重塑矩阵
+ */
 public class ReshapetheMatrix {
     public int[][] matrixReshape(int[][] nums, int r, int c) {
         if (nums.length * nums[0].length != r * c) {
