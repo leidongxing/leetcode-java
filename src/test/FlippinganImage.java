@@ -1,5 +1,8 @@
 package test;
 
+/**
+ * 翻转图像
+ */
 public class FlippinganImage {
     public int[][] flipAndInvertImage(int[][] A) {
 //        for(int i=0;i<A.length;i++) {
