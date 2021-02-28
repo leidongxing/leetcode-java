@@ -1,44 +1,20 @@
 package test;
 
+/**
+ * 单调数列
+ */
 public class MonotonicArray {
     public boolean isMonotonic1(int[] A) {
-        if (A.length <= 2) {
-            return true;
-        }
-        int i = 0;
-        while (i + 1 <= A.length - 1) {
-            if (A[i] != A[i + 1]) {
-                break;
+        boolean inc = true, dec = true;
+        for (int i = 0; i < A.length - 1; i++) {
+            if (A[i] > A[i + 1]) {
+                inc = false;
             }
-            i++;
-        }
-        if (i == A.length - 1) {
-            return true;
-        } else {
-            int last = A[i];
-            i++;
-            boolean noLow;
-            if (last < A[i]) {
-                noLow = true;
-            } else {
-                noLow = false;
+            if (A[i] < A[i + 1]) {
+                dec = false;
             }
-            last = A[i];
-            for (i = i + 1; i < A.length; i++) {
-                if (noLow) {
-                    if (A[i] < last) {
-                        return false;
-                    }
-                } else {
-                    if (A[i] > last) {
-                        return false;
-                    }
-
-                }
-                last = A[i];
-            }
-            return true;
         }
+        return inc || dec;
     }
 
     public boolean isMonotonic(int[] A) {
@@ -46,16 +22,20 @@ public class MonotonicArray {
     }
 
     public boolean increasing(int[] A) {
-        for (int i = 0; i < A.length - 1; ++i)
-            if (A[i] > A[i + 1])
+        for (int i = 0; i < A.length - 1; i++) {
+            if (A[i] > A[i + 1]) {
                 return false;
+            }
+        }
         return true;
     }
 
     public boolean decreasing(int[] A) {
-        for (int i = 0; i < A.length - 1; ++i)
-            if (A[i] < A[i + 1])
+        for (int i = 0; i < A.length - 1; i++) {
+            if (A[i] < A[i + 1]) {
                 return false;
+            }
+        }
         return true;
     }
 
