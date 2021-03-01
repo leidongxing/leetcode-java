@@ -1,7 +1,14 @@
 package test;
 
+import java.util.Arrays;
+
+/**
+ * 缺失的第一个正数
+ * 要求 时间复杂度O(n) 空间复杂度O(1)
+ */
 public class FirstMissingPositive {
 
+    //排序 然后查找
     public int firstMissingPositive1(int[] nums) {
         if (nums.length == 0) {
             return 1;
@@ -66,36 +73,50 @@ public class FirstMissingPositive {
         return left;
     }
 
-    public int firstMissingPositive(int[] nums) {
-        int i = 0;
-        while (i < nums.length) {
-            if (nums[i] == i + 1 || nums[i] <= 0 || nums[i] > nums.length) {
-                i++;
-            } else if (nums[nums[i] - 1] != nums[i]) {
-                swap(nums, i, nums[i] - 1);
-            } else {
-                i++;
+    //两重循环
+    public int firstMissingPositive2(int[] nums) {
+        for (int i = 1; i <= nums.length; i++) {
+            boolean isFound = false;
+            for (int j = 0; j < nums.length; j++) {
+                if (i == nums[j]) {
+                    isFound = true;
+                    break;
+                }
+            }
+            if (!isFound) {
+                return i;
             }
         }
-        i = 0;
-        while (i < nums.length && nums[i] == i + 1) {
-            i++;
+        return nums.length + 1;
+    }
+
+
+    //置换  缺失的第一个正数
+    public int firstMissingPositive(int[] nums) {
+        int n = nums.length;
+        //不断交换当前值 存在其对应的下标处
+        for (int i = 0; i < n; i++) {
+            //当前值大于0  当前值小于总的  不在下标下
+            while (nums[i] > 0 && nums[i] <= n && nums[nums[i] - 1] != nums[i]) {
+                int tmp = nums[nums[i] - 1];
+                nums[nums[i] - 1] = nums[i];
+                nums[i] = tmp;
+            }
         }
-        return i + 1;
+        //再次遍历 下标不正确的即为所求值
+        for (int i = 0; i < n; i++) {
+            if (nums[i] != i + 1) {
+                return i + 1;
+            }
+        }
+        return n + 1;
     }
-
-    void swap(int[] A, int i, int j) {
-        int temp = A[i];
-        A[i] = A[j];
-        A[j] = temp;
-    }
-
 
     public static void main(String[] args) {
         FirstMissingPositive fmp = new FirstMissingPositive();
-//		System.out.println(fmp.firstMissingPositive(new int[] {1,2,0}));
-//		System.out.println(fmp.firstMissingPositive(new int[] {3,4,-1,1}));
-        System.out.println(fmp.firstMissingPositive(new int[]{7, 8, 9, 11, 12}));
-        System.out.println(fmp.firstMissingPositive(new int[]{-1, 2}));
+        System.out.println(fmp.firstMissingPositive(new int[]{1, 2, 0}));//3
+        System.out.println(fmp.firstMissingPositive(new int[]{3, 4, -1, 1}));//2
+        System.out.println(fmp.firstMissingPositive(new int[]{7, 8, 9, 11, 12}));//1
+        System.out.println(fmp.firstMissingPositive(new int[]{-1, 2}));//1
     }
 }
