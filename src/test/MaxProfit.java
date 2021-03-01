@@ -6,6 +6,28 @@ package test;
  * 买卖股票的最佳时机
  */
 public class MaxProfit {
+
+    /**
+     * 买卖股票的最佳时机
+     */
+    public int maxProfit(int[] prices) {
+        if (prices.length == 0) {
+            return 0;
+        }
+        int profit = 0;
+        int buy = prices[0];
+        for (int i = 1; i < prices.length; i++) {
+            //买的价格必须低
+            if (buy > prices[i]) {
+                buy = prices[i];
+            } else if (prices[i] - buy > profit) {
+                //卖的价格必须高
+                profit = prices[i] - buy;
+            }
+        }
+        return profit;
+    }
+
     /**
      * 买卖股票的最佳时机 II
      */
@@ -97,7 +119,7 @@ public class MaxProfit {
     /**
      * 买卖股票的最佳时机 III
      */
-    public int maxProfit(int[] prices) {
+    public int maxProfitIII2(int[] prices) {
         //不买入利润
         int result = 0;
         //第一次买入
@@ -116,6 +138,11 @@ public class MaxProfit {
             sell2 = Math.max(sell2, buy2 + prices[i]);
         }
         return Math.max(Math.max(result, sell1), sell2);
+    }
+
+    public static void main(String[] args) {
+        System.out.println(new MaxProfit().maxProfit(new int[]{7, 1, 5, 3, 6, 4}));//5
+        System.out.println(new MaxProfit().maxProfit(new int[]{7, 6, 4, 3, 1}));//0
     }
 
 }
