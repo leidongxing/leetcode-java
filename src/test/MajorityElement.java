@@ -5,16 +5,37 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
+/**
+ * 数组中出现次数超过一半的数字
+ */
 public class MajorityElement {
 
-    private int countInRange(int[] nums, int num, int lo, int hi) {
+    /**
+     * 摩尔投票法 给每个数投票
+     * 是候选人+1 不是候选-1
+     */
+    public int majorityElement(int[] nums) {
         int count = 0;
-        for (int i = lo; i <= hi; i++) {
-            if (nums[i] == num) {
+        Integer candidate = null;
+        for (int num : nums) {
+            if (count == 0) {
+                candidate = num;
+            }
+            if (num == candidate) {
                 count++;
+            } else {
+                count--;
             }
         }
-        return count;
+        return candidate;
+    }
+
+    /**
+     * 分治查找
+     * 如果数a是数组 nums 的众数，将 nums 分成两部分，那么a必定是至少一部分的众数。
+     */
+    public int majorityElement1(int[] nums) {
+        return majorityElementRec(nums, 0, nums.length - 1);
     }
 
     private int majorityElementRec(int[] nums, int lo, int hi) {
@@ -33,8 +54,28 @@ public class MajorityElement {
         return leftCount > rightCount ? left : right;
     }
 
-    public int majorityElement(int[] nums) {
-        return majorityElementRec(nums, 0, nums.length - 1);
+    private int countInRange(int[] nums, int num, int lo, int hi) {
+        int count = 0;
+        for (int i = lo; i <= hi; i++) {
+            if (nums[i] == num) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    /**
+     * 随机寻找
+     */
+    public int majorityElement2(int[] nums) {
+        Random rand = new Random();
+        int majorityCount = nums.length / 2;
+        while (true) {
+            int candidate = nums[randRange(rand, 0, nums.length)];
+            if (countOccurences(nums, candidate) > majorityCount) {
+                return candidate;
+            }
+        }
     }
 
     private int randRange(Random rand, int min, int max) {
@@ -51,23 +92,18 @@ public class MajorityElement {
         return count;
     }
 
+    /**
+     * 排序法
+     */
     public int majorityElement3(int[] nums) {
-        Random rand = new Random();
-        int majorityCount = nums.length / 2;
-        while (true) {
-            int candidate = nums[randRange(rand, 0, nums.length)];
-            if (countOccurences(nums, candidate) > majorityCount) {
-                return candidate;
-            }
-        }
-    }
-
-    public int majorityElement1(int[] nums) {
         Arrays.sort(nums);
         return nums[nums.length / 2];
     }
 
-    public int majorityElement2(int[] nums) {
+    /**
+     * hash计数法
+     */
+    public int majorityElement4(int[] nums) {
         if (nums.length == 1) {
             return nums[0];
         }
@@ -90,9 +126,9 @@ public class MajorityElement {
 
     public static void main(String[] args) {
         MajorityElement me = new MajorityElement();
-        // System.out.println(me.majorityElement(new int[] {3,2,3}));
-        // System.out.println(me.majorityElement(new int[] {2,2,1,1,1,2,2}));
-        // System.out.println(me.majorityElement(new int[] {10,9,9,9,10}));
+        System.out.println(me.majorityElement(new int[] {3,2,3}));
+        System.out.println(me.majorityElement(new int[] {2,2,1,1,1,2,2}));
+        System.out.println(me.majorityElement(new int[] {10,9,9,9,10}));
         System.out.println(me.majorityElement(new int[]{2, 2, 1, 1, 1, 2, 2}));
     }
 }
