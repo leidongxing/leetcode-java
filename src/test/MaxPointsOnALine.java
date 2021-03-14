@@ -1,7 +1,5 @@
 package test;
 
-import com.sun.javafx.collections.MappingChange;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -33,8 +31,9 @@ public class MaxPointsOnALine {
                 y = y / gcd;
                 String key = x + "@" + y;
                 map.put(key, map.getOrDefault(key, 0) + 1);
-                max = Math.max(result, max + duplicate + 1);
+                max = Math.max(max, map.get(key));
             }
+            result = Math.max(result, max + duplicate + 1);
         }
         return result;
     }
