@@ -1,62 +1,37 @@
 package test;
 
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
+/**
+ * 有效的括号
+ */
 public class ValidParentheses {
     //( ) ,{ }, [ ]
     public boolean isValid(String s) {
+        //不是偶数 一定无效
         if (s.length() % 2 == 1) {
             return false;
         }
-        List<Character> al = new LinkedList<Character>();
+        Map<Character, Character> pairs = new HashMap<>(4);
+        pairs.put(')', '(');
+        pairs.put(']', '[');
+        pairs.put('}', '{');
+
+        Stack<Character> stack = new Stack<>();
         for (int i = 0; i < s.length(); i++) {
-            if (al.isEmpty()) {
-                if (s.charAt(i) != '(' && s.charAt(i) != '{' && s.charAt(i) != '[') {
+            char c = s.charAt(i);
+            if (pairs.containsKey(c)) {
+                if (stack.isEmpty() || !stack.peek().equals(pairs.get(c))) {
                     return false;
                 }
-                al.add(s.charAt(i));
+                stack.pop();
             } else {
-                if (s.charAt(i) == ')') {
-                    if (al.get(al.size() - 1) != '(') {
-                        return false;
-                    }
-                    al.remove(al.size() - 1);
-                } else if (s.charAt(i) == '}') {
-                    if (al.get(al.size() - 1) != '{') {
-                        return false;
-                    }
-                    al.remove(al.size() - 1);
-                } else if (s.charAt(i) == ']') {
-                    if (al.get(al.size() - 1) != '[') {
-                        return false;
-                    }
-                    al.remove(al.size() - 1);
-                } else {
-                    al.add(s.charAt(i));
-                }
+                // ( [ { 直接入栈
+                stack.push(c);
             }
         }
-        if (al.isEmpty()) {
-            return true;
-        }
-        return false;
+        return stack.isEmpty();
     }
-
-//	public boolean isValid(String s) {
-//		Stack<Character> stack = new Stack<Character>();
-//		for (char c : s.toCharArray()) {
-//			if (c == '(')
-//				stack.push(')');
-//			else if (c == '{')
-//				stack.push('}');
-//			else if (c == '[')
-//				stack.push(']');
-//			else if (stack.isEmpty() || stack.pop() != c)
-//				return false;
-//		}
-//		return stack.isEmpty();
-//	}
 
     public static void main(String[] args) {
         System.out.println(new ValidParentheses().isValid("()"));
