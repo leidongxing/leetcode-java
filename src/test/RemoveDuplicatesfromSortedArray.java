@@ -1,5 +1,8 @@
 package test;
 
+/**
+ * 删除有序数组中的重复项
+ */
 public class RemoveDuplicatesfromSortedArray {
     public int removeDuplicates(int[] nums) {
         int length = 0;
@@ -19,9 +22,6 @@ public class RemoveDuplicatesfromSortedArray {
             } else if (!isDuplicate) {
                 length++;
             }
-        }
-        for (int i = 0; i < nums.length; i++) {
-            System.out.print(nums[i] + "、");
         }
         return length;
     }
