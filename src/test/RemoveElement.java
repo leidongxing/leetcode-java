@@ -1,7 +1,23 @@
 package test;
 
+/**
+ * 移除元素
+ */
 public class RemoveElement {
     public int removeElement(int[] nums, int val) {
+        int left = 0;
+        int right = 0;
+        while (right < nums.length) {
+            if (nums[right] != val) {
+                nums[left] = nums[right];
+                left++;
+            }
+            right++;
+        }
+        return left;
+    }
+
+    public int removeElement1(int[] nums, int val) {
         int lastIndex = nums.length - 1;
         for (int i = 0; i < nums.length; i++) {
             if (nums[i] == val && i < lastIndex) {
