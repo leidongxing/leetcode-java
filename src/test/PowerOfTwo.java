@@ -1,7 +1,10 @@
 package test;
 
-public class PowerofTwo {
-    public boolean isPowerOfTwo(int n) {
+/**
+ * 2的幂
+ */
+public class PowerOfTwo {
+    public boolean isPowerOfTwo1(int n) {
         if (n == 1) {
             return true;
         }
@@ -14,16 +17,15 @@ public class PowerofTwo {
             }
             n = n / 2;
         }
-        if (n == 2) {
-            return true;
-        } else {
-            return false;
-        }
+        return n == 2;
+    }
 
+    public boolean isPowerOfTwo(int n) {
+        return n > 0 && (n & (n - 1)) == 0;
     }
 
     public static void main(String[] args) {
-        PowerofTwo p = new PowerofTwo();
+        PowerOfTwo p = new PowerOfTwo();
         System.out.println(p.isPowerOfTwo(10));
         System.out.println(p.isPowerOfTwo(16));
         System.out.println(p.isPowerOfTwo(14));
