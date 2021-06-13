@@ -4,6 +4,9 @@ interface VersionControl {
     boolean isBadVersion(int version);
 }
 
+/**
+ * 第一个错误的版本
+ */
 public class FirstBadVersion implements VersionControl {
     public int firstBadVersion(int n) {
 //    	for (int i = 1; i < n; i++) {
