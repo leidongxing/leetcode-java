@@ -7,6 +7,7 @@ public class ClacTimeThread extends Thread {
         this.s = s;
     }
 
+    @Override
     public void run() {
         long startTime = System.currentTimeMillis();
         s.doIt();

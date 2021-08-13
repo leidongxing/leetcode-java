@@ -21,7 +21,7 @@ public class MaxPointsOnALine {
             Map<String, Integer> map = new HashMap<>();
             for (int j = i + 1; j < points.length; j++) {
                 int x = points[j][0] - points[i][0];
-                int y = points[j][1] = points[i][1];
+                int y = points[j][1] - points[i][1];
                 if (x == 0 && y == 0) {
                     duplicate++;
                     continue;
@@ -48,5 +48,9 @@ public class MaxPointsOnALine {
             b = temp;
         }
         return a;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(new MaxPointsOnALine().maxPoints(new int[][]{{1, 1}, {2, 2}, {3, 3}}));
     }
 }

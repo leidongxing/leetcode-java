@@ -1,5 +1,8 @@
 package test;
 
+/**
+ * 在排序数组中查找元素的第一个和最后一个位置
+ */
 public class FindFirstandLastPositionofElementinSortedArray {
     public int[] searchRange(int[] nums, int target) {
         int left = 0;
