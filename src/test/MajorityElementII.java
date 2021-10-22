@@ -6,6 +6,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+/**
+ * 求众数 II
+ * 找出其中所有出现超过 ⌊ n/3 ⌋ 次的元素
+ */
 public class MajorityElementII {
     //Moore majority vote algorithm
     public List<Integer> majorityElement(int[] nums) {
