@@ -43,6 +43,29 @@ public class SingleNumber {
         return b;
     }
 
+    /**
+     * 只出现一次的数字 III
+     * 恰好有两个元素只出现一次，其余所有元素均出现两次。 找出只出现一次的那两个元素。
+     */
+    public int[] singleNumber3(int[] nums) {
+        int xorsum = 0;
+        //所有出现一次的元素异或和
+        for (int num : nums) {
+            xorsum ^= num;
+        }
+        //防止溢出
+        int lsb = (xorsum == Integer.MIN_VALUE ? xorsum : xorsum & (-xorsum));
+        int type1 = 0, type2 = 0;
+        for (int num : nums) {
+            if ((num & lsb) != 0) {
+                type1 ^= num;
+            } else {
+                type2 ^= num;
+            }
+        }
+        return new int[]{type1, type2};
+    }
+
     public static void main(String[] args) {
         SingleNumber r = new SingleNumber();
         r.singleNumber(new int[]{2, 2, 1});

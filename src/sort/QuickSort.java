@@ -9,7 +9,7 @@ import java.util.Arrays;
  */
 public class QuickSort {
     public int[] quickSort(int[] A, int left, int right) {
-        int p = 0;
+        int p;
         if (left < right) {
             p = partition(A, left, right);
             quickSort(A, left, p - 1);
