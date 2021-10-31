@@ -1,13 +1,15 @@
 package test;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
+/**
+ * 键盘行
+ */
 public class KeyboardRow {
-    public String[] findWords(String[] words) {
+    /**
+     * 返回可以使用在 美式键盘 同一行的字母打印出来的单词
+     */
+    public String[] findWords1(String[] words) {
         if (words.length == 0) {
             return new String[]{};
         }
@@ -102,14 +104,38 @@ public class KeyboardRow {
             }
             isMatch = true;
         }
-        String[] newResult = Arrays.copyOf(result, i);
-        return newResult;
+        return Arrays.copyOf(result, i);
+    }
+
+
+    public String[] findWords(String[] words) {
+        List<String> list = new ArrayList<>();
+        //为26个英文字母标记行号 第0 1 2行
+        String rowIdx = "12210111011122000010020202";
+        for (String word : words) {
+            boolean isValid = true;
+            char idx = rowIdx.charAt(Character.toLowerCase(word.charAt(0)) - 'a');
+            for (int i = 1; i < word.length(); i++) {
+                if (rowIdx.charAt(Character.toLowerCase(word.charAt(i)) - 'a') != idx) {
+                    isValid = false;
+                    break;
+                }
+            }
+            if (isValid) {
+                list.add(word);
+            }
+        }
+        String[] result = new String[list.size()];
+        for (int i = 0; i < list.size(); i++) {
+            result[i] = list.get(i);
+        }
+        return result;
     }
 
     public static void main(String[] args) {
         KeyboardRow k = new KeyboardRow();
-//		k.findWords(new String[] {"Hello", "Alaska", "Dad", "Peace"});
-        k.findWords(new String[]{"asdfghjkl", "qwertyuiop", "zxcvbnm"});
+        System.out.println(Arrays.toString(k.findWords(new String[]{"Hello", "Alaska", "Dad", "Peace"})));
+      //  System.out.println(Arrays.toString(k.findWords(new String[]{"asdfghjkl", "qwertyuiop", "zxcvbnm"})));
     }
 
 
