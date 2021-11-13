@@ -1,7 +1,26 @@
 package test;
 
+/**
+ * 检测大写字母
+ */
 public class DetectCapital {
     public boolean detectCapitalUse(String word) {
+        // 若第1个字母为小写，则需额外判断第2个字母是否为小写
+        if (word.length() >= 2 && Character.isLowerCase(word.charAt(0)) && Character.isUpperCase(word.charAt(1))) {
+            return false;
+        }
+
+        // 无论第1个字母是否大写，其他字母必须与第2个字母的大小写相同
+        for (int i = 2; i < word.length(); ++i) {
+            if (Character.isLowerCase(word.charAt(i)) ^ Character.isLowerCase(word.charAt(1))) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+
+    public boolean detectCapitalUse1(String word) {
         char[] sChar = word.toCharArray();
         boolean isAllUp = false;
         boolean isAllLow = false;
