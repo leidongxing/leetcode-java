@@ -8,7 +8,7 @@ import java.util.Arrays;
  * 相对名次
  */
 public class RelativeRanks {
-    //排序+二分查找
+    //排序+二分查找  nums中的所有值互不相同
     public String[] findRelativeRanks1(int[] nums) {
         int[] score = new int[nums.length];
         System.arraycopy(nums, 0, score, 0, nums.length);
@@ -29,7 +29,7 @@ public class RelativeRanks {
         return result;
     }
 
-    //计数排序
+    //计数排序  nums中的所有值互不相同
     public String[] findRelativeRanks(int[] nums) {
         int max = 0;
         // 找出找出最高的成绩
