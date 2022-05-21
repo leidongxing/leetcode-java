@@ -3,6 +3,9 @@ package test;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * 在长度2N的数组中找出重复N次的元素
+ */
 public class NRepeatedElementinSize2NArray {
     public int repeatedNTimes(int[] A) {
         Set<Integer> numSet = new HashSet<Integer>();
