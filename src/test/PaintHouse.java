@@ -68,11 +68,35 @@ public class PaintHouse {
         return result == infty ? -1 : result;
     }
 
+    /**
+     * @param costs n*3的矩阵  costs[0][0]costs[0][1]costs[0][2]第0号房子粉刷成红色、蓝色、绿色的成本
+     * @return 粉刷完所有房子最少的花费成本
+     */
+    public int minCost(int[][] costs) {
+        int n = costs.length;
+        int a = costs[0][0];
+        int b = costs[0][1];
+        int c = costs[0][2];
+        for (int i = 1; i < n; i++) {
+            int d = Math.min(b, c) + costs[i][0];
+            int e = Math.min(a, c) + costs[i][1];
+            int f = Math.min(a, b) + costs[i][2];
+            a = d;
+            b = e;
+            c = f;
+        }
+        return Math.min(Math.min(a, b), c);
+    }
+
+
     public static void main(String[] args) {
         PaintHouse p = new PaintHouse();
         System.out.println(p.minCost(new int[]{0, 0, 0, 0, 0}, new int[][]{{1, 10}, {10, 1}, {10, 1}, {1, 10}, {5, 1}}, 5, 2, 3));//9
         System.out.println(p.minCost(new int[]{0, 2, 1, 2, 0}, new int[][]{{1, 10}, {10, 1}, {10, 1}, {1, 10}, {5, 1}}, 5, 2, 3));//11
         System.out.println(p.minCost(new int[]{0, 0, 0, 0, 0}, new int[][]{{1, 10}, {10, 1}, {1, 10}, {10, 1}, {1, 10}}, 5, 2, 5));//5
         System.out.println(p.minCost(new int[]{3, 1, 2, 3}, new int[][]{{1, 1, 1}, {1, 1, 1}, {1, 1, 1}, {1, 1, 1}}, 4, 3, 3));//-1
+
+        System.out.println(p.minCost(new int[][]{{17, 2, 17}, {16, 16, 5}, {14, 3, 19}}));//2 + 5 + 3 = 10
+        System.out.println(p.minCost(new int[][]{{7, 6, 2}})); //2
     }
 }
